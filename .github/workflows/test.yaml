@@ -1,0 +1,12 @@
+name: Test
+on: [push]
+jobs:
+  get-package-version:
+    name: Get package version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: get-package-version
+        uses: seelts/github-actions/get-package-version@main
+      - run: echo "outputs '${{ toJSON(steps.get-package-version.outputs) }}'"
+        shell: bash

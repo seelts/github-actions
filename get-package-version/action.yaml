@@ -1,21 +1,13 @@
 name: 'Get package version'
 description: 'Reads "version" field from package.json'
 outputs:
-#  found:
-#    description: 'Indicates if a version was successfully read from package.json'
-  value:
+  version:
     description: 'The value of the "version" field from package.json'
-    value: ${{ steps.shell-script.outputs.version }}
+    value: ${{ steps.shell-script.outputs.result }}
 runs:
   using: 'composite'
   steps:
     - name: 'Execute shell script'
       id: shell-script
-      run: echo "::set-output name=version::$(echo ${{ github.action_path }})"
-      shell: sh
-    - run: echo ${{ github.action_path }}
-      shell: sh
-    - run: echo "${{ github.action_path }}"
-      shell: sh
-    - run: echo '${{ github.action_path }}'
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh)"
       shell: sh
