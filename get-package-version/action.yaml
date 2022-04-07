@@ -1,13 +1,13 @@
-name: 'Get package version'
-description: 'Reads "version" field from package.json'
+name: Get package version
+description: Reads "version" field from package.json
 outputs:
   version:
-    description: 'The value of the "version" field from package.json'
+    description: The value of the "version" field from package.json
     value: ${{ steps.shell-script.outputs.result }}
 runs:
-  using: 'composite'
+  using: composite
   steps:
-    - name: 'Execute shell script'
+    - name: Execute shell script
       id: shell-script
       run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh)"
       shell: sh

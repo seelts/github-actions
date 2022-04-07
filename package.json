@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "@filtu/eslint-config": "^1.0.0",
     "@filtu/prettier-config": "^2.0.0",
