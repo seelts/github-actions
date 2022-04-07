@@ -1,4 +1,4 @@
-name: Test
+name: Test actions
 on: [push]
 jobs:
   get-package-version:
@@ -7,6 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: get-package-version
-        uses: seelts/github-actions/get-package-version@main
-      - run: echo "outputs '${{ toJSON(steps.get-package-version.outputs) }}'"
+        uses: ./get-package-version
+      - run: 'echo "package version: ${{ steps.get-package-version.outputs.version }}"'
         shell: bash
