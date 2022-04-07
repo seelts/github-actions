@@ -1,0 +1,13 @@
+name: Get repository version tags
+description: Returns s JSON representing all versions tags from current repository
+outputs:
+  tags:
+    description: An array of all version tags found in current repository
+    value: ${{ steps.shell-script.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh)"
+      shell: sh
