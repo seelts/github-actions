@@ -1,0 +1,13 @@
+name: Tag current commit
+description: Adds git tag to current commit and pushes it to remote
+inputs:
+  tag:
+    description: Tag
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: ${{ github.action_path }}/script.sh '${{ inputs.tag }}'
+      shell: sh
