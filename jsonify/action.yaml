@@ -2,7 +2,7 @@ name: JSONify
 description: Transforms input value into a JSON-formatted string
 inputs:
   value:
-    description: 'Input value'
+    description: Input value
     required: true
 outputs:
   json:

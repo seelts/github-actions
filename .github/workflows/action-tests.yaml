@@ -14,6 +14,19 @@ jobs:
           value: ${{ env.value }}
       - run: echo 'JSON version of '\''${{ env.value }}'\'' is ${{ steps.jsonify.outputs.json }}'
         shell: sh
+  build-version-tag:
+    name: Build version tag
+    runs-on: ubuntu-latest
+    env:
+      version: 0.0.0
+    steps:
+      - uses: actions/checkout@v3
+      - id: build-version-tag
+        uses: ./build-version-tag
+        with:
+          version: ${{ env.version }}
+      - run: echo Version tag for \'${{ env.version }}\' version is \'${{ steps.build-version-tag.outputs.version-tag }}\'
+        shell: sh
   get-package-version:
     name: Get package version
     runs-on: ubuntu-latest

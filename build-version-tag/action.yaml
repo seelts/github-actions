@@ -1,0 +1,17 @@
+name: Build version tag
+description: Formats input string as a version to use with git tag
+inputs:
+  version:
+    description: Version
+    required: true
+outputs:
+  version-tag:
+    description: A string which can be used as a version tag in git repository
+    value: ${{ steps.shell-script.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh '${{ inputs.version }}')"
+      shell: sh

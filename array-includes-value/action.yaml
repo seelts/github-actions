@@ -5,10 +5,10 @@ description: >
   Returns a boolean indicating if the value is in the array.
 inputs:
   array:
-    description: 'Array'
+    description: Array
     required: true
   value:
-    description: 'Value'
+    description: Value
     required: true
 outputs:
   includes:
