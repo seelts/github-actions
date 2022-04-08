@@ -1,0 +1,23 @@
+name: Array includes value
+description: >
+  Accepts an array and a value as its inputs.
+  All inputs must be valid JSON values.
+  Returns a boolean indicating if the value is in the array.
+inputs:
+  array:
+    description: 'Array'
+    required: true
+  value:
+    description: 'Value'
+    required: true
+outputs:
+  includes:
+    description: A boolean indicating in the value is included in the array
+    value: ${{ steps.shell-script.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh '${{ inputs.array }}' '${{ inputs.value }}')"
+      shell: sh
