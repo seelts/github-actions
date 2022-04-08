@@ -1,0 +1,52 @@
+name: Action tests
+on: [push]
+jobs:
+  jsonify:
+    name: JSONify
+    runs-on: ubuntu-latest
+    env:
+      value: a"b
+    steps:
+      - uses: actions/checkout@v3
+      - id: jsonify
+        uses: ./jsonify
+        with:
+          value: ${{ env.value }}
+      - run: echo 'JSON version of '\''${{ env.value }}'\'' is ${{ steps.jsonify.outputs.json }}'
+        shell: sh
+  get-package-version:
+    name: Get package version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: get-package-version
+        uses: ./get-package-version
+      - id: jsonify
+        run: jq --null-input --arg value ${{ steps.get-package-version.outputs.version }} '$value'
+      - run: "echo 'package version: ${{ steps.jsonify.outputs.version }}'"
+        shell: sh
+    outputs:
+      version: ${{ steps.jsonify.outputs.version }}
+  get-repository-version-tags:
+    name: Get repository version tags
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - id: get-repository-version-tags
+        uses: ./get-repository-version-tags
+      - run: "echo 'repository version tags: ${{ steps.get-repository-version-tags.outputs.tags }}'"
+        shell: sh
+    outputs:
+      tags: ${{ steps.get-repository-version-tags.outputs.tags }}
+  array-includes-value:
+    name: Check if package version is in repository tags
+    runs-on: ubuntu-latest
+    needs: [get-package-version, get-repository-version-tags]
+    steps:
+      - id: array-includes-value
+        uses: ./array-includes-value
+        with:
+          array: ${{ needs.get-repository-version-tags.outputs.tags }}
+          value: ${{ needs.get-package-version.outputs.version }}
+      - run: "echo 'repository tags contains package version: ${{ steps.array-includes-value.outputs.includes }}'"
+        shell: sh

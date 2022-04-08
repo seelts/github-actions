@@ -1,0 +1,17 @@
+name: JSONify
+description: Transforms input value into a JSON-formatted string
+inputs:
+  value:
+    description: 'Input value'
+    required: true
+outputs:
+  json:
+    description: A JSON string representing an input value
+    value: ${{ steps.shell-script.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh '${{ inputs.value }}')"
+      shell: sh
