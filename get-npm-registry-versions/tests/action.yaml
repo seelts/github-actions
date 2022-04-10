@@ -1,0 +1,7 @@
+name: Get npm registry versions
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./get-npm-registry-versions/tests/invalid-package
+    - uses: ./get-npm-registry-versions/tests/valid-package

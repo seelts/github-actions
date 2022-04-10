@@ -1,5 +1,5 @@
 name: Get repository version tags
-description: Returns s JSON representing all versions tags from current repository
+description: Returns a JSON representing all version tags from current repository
 outputs:
   tags:
     description: An array of all version tags found in current repository

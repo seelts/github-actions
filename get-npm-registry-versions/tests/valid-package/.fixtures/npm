@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+cat << EOF
+[
+  "0.0.0",
+  "0.0.1"
+]
+EOF

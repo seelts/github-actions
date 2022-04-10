@@ -1,0 +1,17 @@
+name: Get npm registry versions
+description: Returns a JSON representing all versions of specified package from npm registry
+inputs:
+  package:
+    description: Package name
+    required: true
+outputs:
+  versions:
+    description: An array of all versions found in npm registry
+    value: ${{ steps.shell-script.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh '${{ inputs.package }}')"
+      shell: sh

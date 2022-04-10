@@ -9,6 +9,13 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./compare-json/tests
 
+  get-npm-registry-versions:
+    name: Get npm registry versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./get-npm-registry-versions/tests
+
 #  jsonify:
 #    name: JSONify
 #    runs-on: ubuntu-latest

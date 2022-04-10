@@ -1,0 +1,19 @@
+name: Get npm registry versions
+description: Valid package
+runs:
+  using: composite
+  steps:
+    - run: echo "${{ github.action_path }}/.fixtures" >> $GITHUB_PATH
+      shell: sh
+    - id: action
+      uses: ./get-npm-registry-versions
+      with:
+        package: 'existing package'
+    - id: comparison
+      uses: ./compare-json
+      with:
+        json1: ${{ steps.action.outputs.versions }}
+        json2: '["0.0.0","0.0.1"]'
+    - if: steps.comparison.outputs.same != 'true'
+      run: echo "::error::Valid package must produce JSON array of versions" && exit 1
+      shell: sh
