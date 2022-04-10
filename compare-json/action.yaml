@@ -1,0 +1,20 @@
+name: Compare JSON
+description: Returns boolean indicating if two JSON values are the same
+inputs:
+  json1:
+    description: First JSON value
+    required: true
+  json2:
+    description: Second JSON value
+    required: true
+outputs:
+  same:
+    description: A boolean indication if input values are the same
+    value: ${{ steps.shell-script.outputs.result == 'true' }}
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh '${{ inputs.json1 }}' '${{ inputs.json2 }}')"
+      shell: sh

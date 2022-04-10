@@ -1,0 +1,13 @@
+name: Compare JSON
+description: Object fields order
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./compare-json
+      with:
+        json1: '{"y":14,"x":4}'
+        json2: '{"x":4,"y":14}'
+    - if: steps.action.outputs.same != 'true'
+      run: echo "::error::Two JSON objects must be the same regardless of fields order" && exit 1
+      shell: sh

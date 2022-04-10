@@ -1,0 +1,13 @@
+name: Compare JSON
+description: With two same numbers
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./compare-json
+      with:
+        json1: 4
+        json2: 4
+    - if: steps.action.outputs.same != 'true'
+      run: echo "::error::Two JSON numbers must be the same" && exit 1
+      shell: sh

@@ -1,0 +1,9 @@
+name: Compare JSON
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./compare-json/tests/same-numbers
+    - uses: ./compare-json/tests/type-casting
+    - uses: ./compare-json/tests/white-spaces
+    - uses: ./compare-json/tests/fields-order

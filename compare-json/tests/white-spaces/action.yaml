@@ -1,0 +1,13 @@
+name: Compare JSON
+description: White spaces
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./compare-json
+      with:
+        json1: '[1,2]'
+        json2: '[1 , 2]'
+    - if: steps.action.outputs.same != 'true'
+      run: echo "::error::White spaces must not make difference" && exit 1
+      shell: sh

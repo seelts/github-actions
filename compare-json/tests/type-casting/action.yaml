@@ -1,0 +1,13 @@
+name: Compare JSON
+description: Casting between types
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./compare-json
+      with:
+        json1: 4
+        json2: '"4"'
+    - if: steps.action.outputs.same != 'false'
+      run: echo "::error::There must be no type casting" && exit 1
+      shell: sh
