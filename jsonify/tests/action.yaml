@@ -1,0 +1,10 @@
+name: JSONify
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./jsonify/tests/empty-input
+    - uses: ./jsonify/tests/number
+    - uses: ./jsonify/tests/string
+    - uses: ./jsonify/tests/array
+    - uses: ./jsonify/tests/object

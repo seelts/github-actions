@@ -1,0 +1,17 @@
+name: JSONify
+description: Empty input
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./jsonify
+      with:
+        value: ''
+    - id: comparison
+      uses: ./compare-json
+      with:
+        json1: ${{ steps.action.outputs.json }}
+        json2: '""'
+    - if: steps.comparison.outputs.same != 'true'
+      run: echo "::error::Must produce JSON string" && exit 1
+      shell: sh

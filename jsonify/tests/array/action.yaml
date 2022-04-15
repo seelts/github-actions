@@ -1,0 +1,17 @@
+name: JSONify
+description: Array
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./jsonify
+      with:
+        value: '[1, "1", "string"]'
+    - id: comparison
+      uses: ./compare-json
+      with:
+        json1: ${{ steps.action.outputs.json }}
+        json2: '"[1, \"1\", \"string\"]"'
+    - if: steps.comparison.outputs.same != 'true'
+      run: echo "::error::Must produce JSON string" && exit 1
+      shell: sh
