@@ -1,0 +1,12 @@
+name: Build version tag
+description: Version prefix
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./build-version-tag
+      with:
+        version: 4
+    - if: steps.action.outputs.version-tag != 'v4'
+      run: echo "::error::Must return a version prefixed with \"v\"" && exit 1
+      shell: sh

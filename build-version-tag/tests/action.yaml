@@ -1,0 +1,6 @@
+name: Build version tag
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./build-version-tag/tests/version-prefix
