@@ -30,22 +30,13 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./build-version-tag/tests
 
-#  get-package-version:
-#    name: Get package version
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - id: get-package-version
-#        uses: ./get-package-version
-#      - id: jsonify
-#        uses: ./jsonify
-#        with:
-#          value: ${{ steps.get-package-version.outputs.version }}
-#      - run: "echo 'package version: ${{ steps.jsonify.outputs.version }}'"
-#        shell: sh
-#    outputs:
-#      version: ${{ steps.get-package-version.outputs.version }}
-#      version-json: ${{ steps.jsonify.outputs.json }}
+  get-package-version:
+    name: Get package version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./get-package-version/tests
+
 #  get-repository-version-tags:
 #    name: Get repository version tags
 #    runs-on: ubuntu-latest
@@ -72,6 +63,8 @@ jobs:
 #        shell: sh
 #    outputs:
 #      includes: ${{ steps.array-includes-value.outputs.includes }}
+#  tag-current-commit:
+#    !!
 #  add-new-version-tag:
 #    name: Use package version as a tag to add to the repository if it does not exist yet
 #    runs-on: ubuntu-latest

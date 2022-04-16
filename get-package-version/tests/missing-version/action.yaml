@@ -1,0 +1,12 @@
+name: Get package version
+description: Missing version
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./get-package-version
+      with:
+        package-filepath: '${{ github.action_path }}/package.json'
+    - if: steps.action.outputs.version != ''
+      run: echo "::error::Must return empty string when version is missing" && exit 1
+      shell: sh

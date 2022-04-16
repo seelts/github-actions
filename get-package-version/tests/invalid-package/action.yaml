@@ -1,0 +1,12 @@
+name: Get package version
+description: Invalid package
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./get-package-version
+      with:
+        package-filepath: '${{ github.action_path }}/invalid-package.json'
+    - if: steps.action.outputs.version != ''
+      run: echo "::error::Must return empty string for invalid package file" && exit 1
+      shell: sh

@@ -1,0 +1,10 @@
+name: Get package version
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./get-package-version/tests/valid-package
+    - uses: ./get-package-version/tests/missing-package
+    - uses: ./get-package-version/tests/invalid-package
+    - uses: ./get-package-version/tests/missing-version
+    - uses: ./get-package-version/tests/default-package
