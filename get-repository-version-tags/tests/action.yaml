@@ -1,0 +1,7 @@
+name: Get repository version tags
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./get-repository-version-tags/tests/version-tags
+    - uses: ./get-repository-version-tags/tests/no-tags

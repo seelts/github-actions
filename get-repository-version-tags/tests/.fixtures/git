@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+COMMAND=$1
+
+if [ "$COMMAND" = "tag" ]; then
+  echo "$TAGS"
+fi

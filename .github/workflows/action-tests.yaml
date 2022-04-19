@@ -37,17 +37,13 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./get-package-version/tests
 
-#  get-repository-version-tags:
-#    name: Get repository version tags
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - id: get-repository-version-tags
-#        uses: ./get-repository-version-tags
-#      - run: "echo 'repository version tags: ${{ steps.get-repository-version-tags.outputs.tags }}'"
-#        shell: sh
-#    outputs:
-#      tags: ${{ steps.get-repository-version-tags.outputs.tags }}
+  get-repository-version-tags:
+    name: Get repository version tags
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./get-repository-version-tags/tests
+
 #  array-includes-value:
 #    name: Check if package version is in repository tags
 #    runs-on: ubuntu-latest

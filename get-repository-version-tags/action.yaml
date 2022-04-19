@@ -1,8 +1,8 @@
 name: Get repository version tags
-description: Returns a JSON representing all version tags from current repository
+description: Returns a JSON array of all version tags from current repository
 outputs:
   tags:
-    description: An array of all version tags found in current repository
+    description: A JSON array of all version tags found in current repository
     value: ${{ steps.shell-script.outputs.result }}
 runs:
   using: composite
