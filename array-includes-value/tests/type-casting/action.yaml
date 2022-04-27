@@ -1,0 +1,13 @@
+name: Array includes value
+description: Type casting
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./array-includes-value
+      with:
+        array: '[4]'
+        value: '"4"'
+    - if: steps.action.outputs.includes != 'false'
+      run: echo "::error::There must be no type casting" && exit 1
+      shell: sh

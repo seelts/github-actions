@@ -1,0 +1,13 @@
+name: Array includes value
+description: Value excluded
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./array-includes-value
+      with:
+        array: '[4]'
+        value: '"item"'
+    - if: steps.action.outputs.includes != 'false'
+      run: echo "::error::Must return `false` when value is excluded" && exit 1
+      shell: sh

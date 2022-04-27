@@ -1,0 +1,8 @@
+name: Array includes value
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./array-includes-value/tests/value-included
+    - uses: ./array-includes-value/tests/value-excluded
+    - uses: ./array-includes-value/tests/type-casting
