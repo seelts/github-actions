@@ -1,0 +1,30 @@
+name: Tag current commit
+description: Valid tag
+runs:
+  using: composite
+  steps:
+    - uses: ./delete-repository-tag
+      with:
+        tag: ___TEST_TAG_TO_BE_ADDED___
+      continue-on-error: true
+    - id: pre-action-check
+      uses: ./repository-has-tag
+      with:
+        tag: ___TEST_TAG_TO_BE_ADDED___
+    - if: steps.pre-action-check.outputs.has != 'false'
+      run: echo "::error::Failed to delete already existing tag" && exit 1
+      shell: sh
+    - id: action
+      uses: ./tag-current-commit
+      with:
+        tag: ___TEST_TAG_TO_BE_ADDED___
+    - id: action-check
+      uses: ./repository-has-tag
+      with:
+        tag: ___TEST_TAG_TO_BE_ADDED___
+    - if: steps.action-check.outputs.has != 'true'
+      run: echo "::error::Failed to add tag" && exit 1
+      shell: sh
+    - uses: ./delete-repository-tag
+      with:
+        tag: ___TEST_TAG_TO_BE_ADDED___

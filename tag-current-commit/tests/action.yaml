@@ -1,0 +1,7 @@
+name: Tag current commit
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./tag-current-commit/tests/empty-input
+    - uses: ./tag-current-commit/tests/valid-tag

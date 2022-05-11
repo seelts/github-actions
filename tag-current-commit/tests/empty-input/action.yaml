@@ -1,0 +1,13 @@
+name: Tag current commit
+description: Empty input
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./tag-current-commit
+      with:
+        tag: ''
+      continue-on-error: true
+    - if: steps.action.outcome != 'failure'
+      run: echo "::error::Must fail when no tag provided" && exit 1
+      shell: sh
