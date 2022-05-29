@@ -1,0 +1,12 @@
+name: Repository has tag
+description: Repository has tag
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./repository-has-tag
+      with:
+        tag: v1
+    - if: steps.action.outputs.has != 'true'
+      run: echo "::error::Must return `true` when repository contains specified tag" && exit 1
+      shell: sh

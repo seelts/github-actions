@@ -1,0 +1,12 @@
+name: Repository has tag
+description: Repository does not have tag
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./repository-has-tag
+      with:
+        tag: v0
+    - if: steps.action.outputs.has != 'false'
+      run: echo "::error::Must return `false` when repository does not contain specified tag" && exit 1
+      shell: sh

@@ -1,0 +1,17 @@
+name: Repository has tag
+description: Returns a boolean indicating whether repository has provided tag
+inputs:
+  tag:
+    description: Tag to be checked for
+    required: true
+outputs:
+  has:
+    description: A boolean indicating if repository has provided tag
+    value: ${{ steps.shell-script.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh '${{ inputs.tag }}')"
+      shell: sh

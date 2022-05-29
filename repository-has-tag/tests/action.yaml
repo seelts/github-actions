@@ -1,0 +1,7 @@
+name: Repository has tag
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./repository-has-tag/tests/has-tag
+    - uses: ./repository-has-tag/tests/no-tag
