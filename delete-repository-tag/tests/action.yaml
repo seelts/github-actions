@@ -1,0 +1,7 @@
+name: Delete repository tag
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./delete-repository-tag/tests/empty-input
+    - uses: ./delete-repository-tag/tests/valid-tag

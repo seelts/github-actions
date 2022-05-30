@@ -1,0 +1,26 @@
+name: Delete repository tag
+description: Valid tag
+runs:
+  using: composite
+  steps:
+    - uses: ./tag-current-commit
+      with:
+        tag: ___TEST_TAG_TO_BE_DELETED___
+    - id: pre-action-check
+      uses: ./repository-has-tag
+      with:
+        tag: ___TEST_TAG_TO_BE_DELETED___
+    - if: steps.pre-action-check.outputs.has != 'true'
+      run: echo "::error::Failed to tag current commit" && exit 1
+      shell: sh
+    - id: action
+      uses: ./delete-repository-tag
+      with:
+        tag: ___TEST_TAG_TO_BE_DELETED___
+    - id: action-check
+      uses: ./repository-has-tag
+      with:
+        tag: ___TEST_TAG_TO_BE_DELETED___
+    - if: steps.action-check.outputs.has != 'false'
+      run: echo "::error::Failed to delete tag" && exit 1
+      shell: sh

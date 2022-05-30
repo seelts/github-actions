@@ -1,0 +1,13 @@
+name: Delete repository tag
+description: Deletes a tag from current repository
+inputs:
+  tag:
+    description: Tag to be deleted
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: ${{ github.action_path }}/script.sh '${{ inputs.tag }}'
+      shell: sh
