@@ -1,0 +1,25 @@
+name: NPM registry has version
+description: Returns a boolean indicating whether npm has provided version published
+inputs:
+  package:
+    description: Package name
+    required: true
+  version:
+    description: Version to be checked for
+    required: true
+outputs:
+  has:
+    description: A boolean indicating if npm has provided version published
+    value: ${{ steps.check.outputs.includes }}
+runs:
+  using: composite
+  steps:
+    - id: versions
+      uses: ./get-npm-registry-versions
+      with:
+        package: ${{ inputs.package }}
+    - id: check
+      uses: ./array-includes-value
+      with:
+        array: ${{ steps.versions.outputs.versions }}
+        value: ${{ inputs.version }}

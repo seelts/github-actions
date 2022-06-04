@@ -1,0 +1,13 @@
+name: NPM registry has version
+description: Registry has version
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./npm-registry-has-version
+      with:
+        package: package-name
+        version: '"1.0.0"'
+    - if: steps.action.outputs.has != 'true'
+      run: echo "::error::Must return `true` when registry contains specified version" && exit 1
+      shell: sh
