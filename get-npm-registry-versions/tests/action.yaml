@@ -7,3 +7,4 @@ runs:
       shell: sh
     - uses: ./get-npm-registry-versions/tests/invalid-package
     - uses: ./get-npm-registry-versions/tests/valid-package-multiple-versions
+    - uses: ./get-npm-registry-versions/tests/valid-package-single-version

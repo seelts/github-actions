@@ -1,0 +1,19 @@
+name: Get npm registry versions
+description: Valid package with single version
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./get-npm-registry-versions
+      env:
+        TEST_OUTPUT: '"0.0.0"'
+      with:
+        package: 'existing package'
+    - id: comparison
+      uses: ./compare-json
+      with:
+        json1: ${{ steps.action.outputs.versions }}
+        json2: '["0.0.0"]'
+    - if: steps.comparison.outputs.same != 'true'
+      run: echo "::error::Valid package must produce JSON array of versions" && exit 1
+      shell: sh
