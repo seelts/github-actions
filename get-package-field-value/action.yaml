@@ -1,0 +1,17 @@
+name: Get package field value
+description: Reads requested field from package.json
+inputs:
+  field:
+    required: true
+    description: A field whose name is to be read
+outputs:
+  value:
+    description: The value of the requested field
+    value: ${{ steps.shell-script.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh '${{ inputs.field }}')"
+      shell: sh

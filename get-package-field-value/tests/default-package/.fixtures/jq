@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+shift $(($# - 1))
+LAST_ARGUMENT="$1"
+printf '%s\n' "$LAST_ARGUMENT"

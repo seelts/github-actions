@@ -30,12 +30,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./build-version-tag/tests
 
-  get-package-version:
-    name: Get package version
+  get-package-field-value:
+    name: Get package field value
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./get-package-version/tests
+      - uses: ./get-package-field-value/tests
 
   get-repository-version-tags:
     name: Get repository version tags

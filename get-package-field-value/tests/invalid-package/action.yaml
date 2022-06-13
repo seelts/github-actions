@@ -1,0 +1,14 @@
+name: Get package field value
+description: Invalid package
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./get-package-field-value
+      with:
+        field: does not matter
+      env:
+        TEST_PACKAGE_FILEPATH: '${{ github.action_path }}/invalid-package.json'
+    - if: steps.action.outputs.value != 'null'
+      run: echo "::error::Must return `null` for invalid package file" && exit 1
+      shell: sh

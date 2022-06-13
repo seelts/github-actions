@@ -1,0 +1,11 @@
+name: Get package field value
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./get-package-field-value/tests/valid-package
+    - uses: ./get-package-field-value/tests/missing-package
+    - uses: ./get-package-field-value/tests/invalid-package
+    - uses: ./get-package-field-value/tests/missing-field
+    - uses: ./get-package-field-value/tests/type-casting
+    - uses: ./get-package-field-value/tests/default-package

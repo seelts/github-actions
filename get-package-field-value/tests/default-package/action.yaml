@@ -1,0 +1,14 @@
+name: Get package field value
+description: Default package
+runs:
+  using: composite
+  steps:
+    - run: echo "${{ github.action_path }}/.fixtures" >> $GITHUB_PATH
+      shell: sh
+    - id: action
+      uses: ./get-package-field-value
+      with:
+        field: does not matter
+    - if: steps.action.outputs.value != 'package.json'
+      run: echo "::error::Must use package.json by default" && exit 1
+      shell: sh

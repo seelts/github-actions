@@ -1,0 +1,14 @@
+name: Get package field value
+description: Valid package
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./get-package-field-value
+      with:
+        field: version
+      env:
+        TEST_PACKAGE_FILEPATH: '${{ github.action_path }}/package.json'
+    - if: steps.action.outputs.value != '"0.0.0"'
+      run: echo "::error::Must return the version field from package file" && exit 1
+      shell: sh

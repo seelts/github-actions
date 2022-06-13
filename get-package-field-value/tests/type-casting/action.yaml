@@ -1,0 +1,14 @@
+name: Get package field value
+description: Type casting
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./get-package-field-value
+      with:
+        field: string
+      env:
+        TEST_PACKAGE_FILEPATH: '${{ github.action_path }}/package.json'
+    - if: steps.action.outputs.value != '"4"'
+      run: echo "::error::There must be no type casting" && exit 1
+      shell: sh
