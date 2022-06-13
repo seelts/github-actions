@@ -1,0 +1,9 @@
+name: Publish to NPM registry
+description: Publishes current package to NPM registry
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: ${{ github.action_path }}/script.sh
+      shell: sh

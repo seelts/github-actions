@@ -1,0 +1,6 @@
+name: Publish to NPM registry
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./publish-to-npm/tests/success

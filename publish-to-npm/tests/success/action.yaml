@@ -1,0 +1,15 @@
+name: Publish to NPM registry
+description: Successful publishing
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./publish-to-npm
+      env:
+        NPM_DRY_RUN: yes
+        NPM_PACKAGE_PATH: '${{ github.action_path }}'
+        NPM_CONFIG_PATH: '${{ github.action_path }}/.npmrc'
+      continue-on-error: true
+    - if: steps.action.outcome != 'success'
+      run: echo "::error::Must successfully publish a package" && exit 1
+      shell: sh
