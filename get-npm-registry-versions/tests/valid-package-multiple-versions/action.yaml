@@ -1,12 +1,16 @@
 name: Get npm registry versions
-description: Valid package
+description: Valid package with multiple versions
 runs:
   using: composite
   steps:
-    - run: echo "${{ github.action_path }}/.fixtures" >> $GITHUB_PATH
-      shell: sh
     - id: action
       uses: ./get-npm-registry-versions
+      env:
+        TEST_OUTPUT: |
+          [
+            "0.0.0",
+            "0.0.1"
+          ]
       with:
         package: 'existing package'
     - id: comparison

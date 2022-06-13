@@ -3,10 +3,10 @@ description: Invalid package
 runs:
   using: composite
   steps:
-    - run: echo "${{ github.action_path }}/.fixtures" >> $GITHUB_PATH
-      shell: sh
     - id: action
       uses: ./get-npm-registry-versions
+      env:
+        TEST_ERROR: yes
       with:
         package: 'non existing package'
     - if: steps.action.outputs.versions != ''

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if [ "$TEST_ERROR" ]; then
+  exit 14
+fi
+
+echo "$TEST_OUTPUT"

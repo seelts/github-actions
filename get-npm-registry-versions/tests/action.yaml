@@ -3,5 +3,7 @@ description: Tests
 runs:
   using: composite
   steps:
+    - run: echo "${{ github.action_path }}/.fixtures" >> $GITHUB_PATH
+      shell: sh
     - uses: ./get-npm-registry-versions/tests/invalid-package
-    - uses: ./get-npm-registry-versions/tests/valid-package
+    - uses: ./get-npm-registry-versions/tests/valid-package-multiple-versions
