@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-shift $(($# - 1))
-
-printf '%s\n' "$1"
