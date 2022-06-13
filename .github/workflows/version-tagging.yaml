@@ -1,0 +1,14 @@
+name: Version tagging
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'package.json'
+jobs:
+  tag-if-needed:
+    name: Tag if needed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./tag-commit-if-needed
