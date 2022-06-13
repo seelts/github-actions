@@ -1,0 +1,12 @@
+name: Unquotify
+description: String
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./unquotify
+      with:
+        json: '"string"'
+    - if: steps.action.outputs.value != 'string'
+      run: echo "::error::Must produce unquoted string" && exit 1
+      shell: sh

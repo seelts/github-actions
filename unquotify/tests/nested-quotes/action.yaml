@@ -1,0 +1,12 @@
+name: Unquotify
+description: Nested quotes
+runs:
+  using: composite
+  steps:
+    - id: action
+      uses: ./unquotify
+      with:
+        json: '"str\"ing"'
+    - if: steps.action.outputs.value != 'str"ing'
+      run: echo "::error::Must unescape nested quotes" && exit 1
+      shell: sh

@@ -23,6 +23,13 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./jsonify/tests
 
+  unquotify:
+    name: Unquotify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./unquotify/tests
+
   build-version-tag:
     name: Build version tag
     runs-on: ubuntu-latest

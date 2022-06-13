@@ -1,0 +1,7 @@
+name: Unquotify
+description: Tests
+runs:
+  using: composite
+  steps:
+    - uses: ./unquotify/tests/string
+    - uses: ./unquotify/tests/nested-quotes

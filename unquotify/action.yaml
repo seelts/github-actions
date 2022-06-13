@@ -1,0 +1,17 @@
+name: Unquotify
+description: Removes wrapping quotes from JSON-formatted string
+inputs:
+  json:
+    description: JSON string
+    required: true
+outputs:
+  value:
+    description: A string value without wrapping quotes
+    value: ${{ steps.shell-script.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - name: Execute shell script
+      id: shell-script
+      run: echo "::set-output name=result::$(${{ github.action_path }}/script.sh '${{ inputs.json }}')"
+      shell: sh
