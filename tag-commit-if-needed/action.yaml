@@ -1,0 +1,19 @@
+name: Tag commit if needed
+description: Ensures current package version has corresponding tag in the repository.
+runs:
+  using: composite
+  steps:
+    - id: package-version
+      uses: ./get-package-version
+    - id: version-tag
+      uses: ./build-version-tag
+      with:
+        version: ${{ steps.package-version.outputs.version }}
+    - id: check
+      uses: ./repository-has-tag
+      with:
+        tag: ${{ steps.version-tag.outputs.version-tag }}
+    - if: steps.check.outputs.has == 'false'
+      uses: ./tag-current-commit
+      with:
+        tag: ${{ steps.version-tag.outputs.version-tag }}
