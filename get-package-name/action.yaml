@@ -1,0 +1,20 @@
+name: Get package name
+description: Reads "name" field from package.json
+outputs:
+  name-json:
+    description: The JSON value of the "name" field from package.json
+    value: ${{ steps.name.outputs.value }}
+  name:
+    description: The value of the "name" field from package.json
+    value: ${{ steps.name.outputs.value }}
+runs:
+  using: composite
+  steps:
+    - id: json-name
+      uses: ./get-package-field-value
+      with:
+        field: name
+    - id: name
+      uses: ./unquotify
+      with:
+        json: ${{ steps.json-name.outputs.value }}
