@@ -1,0 +1,16 @@
+name: Publish to NPM registry if needed
+description: Ensures current package version is published to NPM registry.
+runs:
+  using: composite
+  steps:
+    - id: package-name
+      uses: ./get-package-name
+    - id: package-version
+      uses: ./get-package-version
+    - id: check
+      uses: ./npm-registry-has-version
+      with:
+        package: ${{ steps.package-name.outputs.name }}
+        version: ${{ steps.package-version.outputs.version-json }}
+    - if: steps.check.outputs.has == 'false'
+      uses: ./publish-to-npm
